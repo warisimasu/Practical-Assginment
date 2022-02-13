@@ -84,6 +84,7 @@ namespace Password_Hashing
                             reduceAttempts(userid);
                             errorMsg = "Userid or password is not valid. Please try again.";
                             lb_error.Text = errorMsg;
+                            logFail();
                             //lb_error.Text =  dbHash + "   " + userHash + "\n" + dbSalt;
                             //Response.Redirect("Login.aspx", false);
                         }

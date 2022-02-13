@@ -29,11 +29,11 @@ namespace Password_Hashing
             if(Session["UserID"] != null && Session["AuthToken"] != null && Request.Cookies["AuthToken"] != null)
             {
 
-                lbl_success.Text = "What the fuck";
+                lbl_success.Text = "very gentle words";
                 if(!Session["AuthToken"].ToString().Equals(Request.Cookies["AuthToken"].Value))
                 {
 
-                    lbl_success.Text = "What THE FUCK 2";
+                    lbl_success.Text = "very gentle words";
                     // Removing all sessions and cookies
                     Session.Clear();
                     Session.Abandon();
@@ -188,6 +188,9 @@ namespace Password_Hashing
 
         protected void Logout(object sender, EventArgs e)
         {
+
+            logingOut();
+
             // Remove All Sessions
             Session.Clear();
             Session.Abandon();
@@ -210,6 +213,47 @@ namespace Password_Hashing
             {
                 Response.Cookies["AuthToken"].Value = string.Empty;
                 Response.Cookies["AuthToken"].Expires = DateTime.Now.AddMonths(-20);
+            }
+        }
+
+        protected void logingOut()
+        {
+
+            try
+            {
+                // declare an instance of the database
+                using (SqlConnection con = new SqlConnection(MYDBConnectionString))
+                {
+                    using (SqlCommand cmd = new SqlCommand("INSERT INTO Logger VALUES(@email,@datetime,@action )"))
+                    {
+                        using (SqlDataAdapter sda = new SqlDataAdapter())
+                        {
+
+
+                            cmd.CommandType = CommandType.Text;
+
+                            DateTime datetime = DateTime.Now;
+
+
+                            cmd.Parameters.AddWithValue("@email", lbl_userID.Text.Trim());
+                            cmd.Parameters.AddWithValue("@datetime", datetime);
+                            cmd.Parameters.AddWithValue("@action", "Logged Out");
+
+
+                            cmd.Connection = con;
+                            con.Open();
+                            cmd.ExecuteNonQuery();
+                            con.Close();
+
+                            
+
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.ToString());
             }
         }
 
