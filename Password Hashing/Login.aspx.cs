@@ -327,7 +327,7 @@ namespace Password_Hashing
 
             //string captchaResponse = 
 
-            lb_error2.Text = captchaResponse;
+            //lb_error2.Text = captchaResponse;
 
             HttpWebRequest req = (HttpWebRequest)WebRequest.Create
                 (" https://www.google.com/recaptcha/api/siteverifiy?secret=6Ld-01oeAAAAAFBlX8-W3QfuX3cYU651TK8cAhrP &response=" + captchaResponse);

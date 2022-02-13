@@ -446,7 +446,7 @@ namespace Password_Hashing
             int score = 0;
 
             // Score 0 very weak
-            // If Length of password is less than 8 chars
+            // If Length of password is less than 12 chars
             if (password.Length < 12)
             {
                 return 1;

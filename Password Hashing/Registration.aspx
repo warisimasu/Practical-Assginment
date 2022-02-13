@@ -25,7 +25,7 @@
             }
 
             else if (str.length < 12) {
-                document.getElementById("passchecker").innerHTML = "Password Length Must be at Least 8 Characters Long";
+                document.getElementById("passchecker").innerHTML = "Password Length Must be at Least 12 Characters Long";
                 document.getElementById("passchecker").style.color = "Red";
                 return ("too_short");
             }
